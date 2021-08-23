@@ -1,6 +1,7 @@
 
 import { AfterViewInit, Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from './../api/api.service';
 @Component({
   selector: 'app-questionbook',
   templateUrl: './questionbook.component.html',
@@ -8,9 +9,22 @@ import { Router } from '@angular/router';
 })
 export class QuestionbookComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
-  constructor(private renderer: Renderer2, private router: Router) {
+  constructor(private renderer: Renderer2, private router: Router, private api: ApiService) {
   }
   ngOnInit(): void {
+    let data = {
+      'query': 'fetch',
+      'databasename': 'question_bank',
+      'column': {
+        '*': '*'
+      },
+      'condtion': {}
+    }
+    this.api.getConfig(data).subscribe((res) => {
+      console.log(res[0].question_bank_id,res[0].question_text_tn);
+    }, (err) => {
+      console.log(err);
+    });
     this.dtOptions = {
       responsive: true,
       columns: [{
@@ -38,7 +52,7 @@ export class QuestionbookComponent implements OnInit {
       let id = event.target.getAttribute("data-id") || event.target.parentElement.getAttribute("data-id");
       if (event.target.hasAttribute("data-id") || event.target.parentElement.hasAttribute("data-id")) {
         if (event.target.getAttribute("data-type") == 'view' || event.target.parentElement.getAttribute("data-type") == 'view')
-          this.router.navigate(["/question-paper/"+id+"/view"]);
+          this.router.navigate(["/question-paper/" + id + "/view"]);
         else if (event.target.getAttribute("data-type") == 'edit' || event.target.parentElement.getAttribute("data-type") == 'edit')
           this.router.navigate(["/question-paper", { id: id, type: 'edit' }]);
         else if (event.target.getAttribute("data-type") == 'delete' || event.target.parentElement.getAttribute("data-type") == 'delete')
@@ -46,7 +60,4 @@ export class QuestionbookComponent implements OnInit {
       }
     });
   }
-
 }
-
-
