@@ -1,10 +1,10 @@
 <div class="login-page">
     <div class="form">
         <img class="img-center" src="../../assets/img/logo.jpeg">
-        <form class="login-form">
-            <input type="text" placeholder="பயனர்பெயர்" />
-            <input type="password" placeholder="கடவுச்சொல்" />
-            <button type="button" (click)="login()">உள்நுழைய</button>
+        <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
+            <input type="text" placeholder="பயனர்பெயர்" formControlName="userName" required>
+            <input type="password" placeholder="கடவுச்சொல்" formControlName="userPassword" required/>
+            <button type="submit" [disabled]="!loginForm.valid">உள்நுழைய</button>
         </form>
     </div>
 </div>

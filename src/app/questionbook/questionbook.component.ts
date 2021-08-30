@@ -1,63 +1,67 @@
 
-import { AfterViewInit, Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from './../api/api.service';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-questionbook',
   templateUrl: './questionbook.component.html',
-  styleUrls: ['./questionbook.component.less']
+  styleUrls: ['./questionbook.component.css'],
+  providers: [MessageService]
 })
+
 export class QuestionbookComponent implements OnInit {
-  dtOptions: DataTables.Settings = {};
-  constructor(private renderer: Renderer2, private router: Router, private api: ApiService) {
+  questions: any;
+  loading = true;
+
+  constructor(private router: Router, private api: ApiService, private messageService: MessageService) {
   }
+
   ngOnInit(): void {
-    let data = {
+    this.tableloadData();
+  }
+
+  tableloadData(){
+    let dataParam = {
       'query': 'fetch',
-      'databasename': 'question_bank',
+      'key': 'question_bank',
       'column': {
         '*': '*'
       },
-      'condtion': {}
-    }
-    this.api.getConfig(data).subscribe((res) => {
-      console.log(res[0].question_bank_id,res[0].question_text_tn);
-    }, (err) => {
-      console.log(err);
-    });
-    this.dtOptions = {
-      responsive: true,
-      columns: [{
-        title: 'கேள்வி எண்',
-        data: 'id',
-        width: "10%",
-      }, {
-        title: 'கேள்வி',
-        data: 'firstName'
-      }, {
-        title: 'நடவடிக்கை',
-        className: "text-center",
-        width: "20%",
-        render: function (data: any, type: any, full: any) {
-          return `<button class="waves-effect btn"   data-id="${full.id}" data-type="view"><i class="gg-eye"></i></button>
-                  <button class="waves-effect btn btn-warning" data-id="${full.id}" data-type="view"><i class="gg-pen"></i></button>
-                  <button class="waves-effect btn btn-danger" data-id="${full.id}" data-type="delete"><i class="gg-trash"></i></button>`;
-        }
-      }]
-    };
-  }
-
-  ngAfterViewInit(): void {
-    this.renderer.listen('document', 'click', (event) => {
-      let id = event.target.getAttribute("data-id") || event.target.parentElement.getAttribute("data-id");
-      if (event.target.hasAttribute("data-id") || event.target.parentElement.hasAttribute("data-id")) {
-        if (event.target.getAttribute("data-type") == 'view' || event.target.parentElement.getAttribute("data-type") == 'view')
-          this.router.navigate(["/question-paper/" + id + "/view"]);
-        else if (event.target.getAttribute("data-type") == 'edit' || event.target.parentElement.getAttribute("data-type") == 'edit')
-          this.router.navigate(["/question-paper", { id: id, type: 'edit' }]);
-        else if (event.target.getAttribute("data-type") == 'delete' || event.target.parentElement.getAttribute("data-type") == 'delete')
-          console.log('delete');
+      'condition': {
+        'status' : 1
       }
+    };
+
+    this.api.getData(dataParam).subscribe(res => {
+      this.questions = res;
+      this.loading = false;
     });
+  }
+  
+  questionAction(questions: any, type: string) {
+    if (type == 'view')
+      this.router.navigate(["/question/" + questions.question_bank_id + "/view"]);
+    else if (type == 'edit')
+      this.router.navigate(["/question/" + questions.question_bank_id + "/edit"]);
+    else if (type == 'delete') {
+      this.loading = true;
+      let deleteData = {
+        'query': 'update',
+        'key': 'question_bank',
+        'values': {
+          'status': 0
+        },
+        'condition': {
+          'question_bank_id':questions.question_bank_id
+        }
+      };
+
+      this.api.getData(deleteData).subscribe(data => {
+        this.messageService.add({ severity: 'success', summary: 'Question Deleted', detail: 'Question Deleted Succefully' });
+        this.tableloadData();
+      });
+      
+    }
   }
 }

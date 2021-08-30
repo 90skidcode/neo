@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
 @Component({
-  selector: 'app-questionpaper',
-  templateUrl: './questionpaper.component.html',
-  styleUrls: ['./questionpaper.component.css']
+  selector: 'app-question',
+  templateUrl: './question.component.html',
+  styleUrls: ['./question.component.css']
 })
-export class QuestionpaperComponent implements OnInit {
+export class QuestionComponent implements OnInit {
   questionid: any = '';
-  constructor(
-    private route: ActivatedRoute,
-  ) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {

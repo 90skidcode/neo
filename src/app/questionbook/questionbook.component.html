@@ -1,14 +1,30 @@
+<p-toast>
+</p-toast>
 <div class="box">
-    <table datatable [dtOptions]="dtOptions" class="row-border hover">
-        <thead>
+    <p-table [value]="questions" responsiveLayout="scroll" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
+        styleClass="p-datatable-sm p-datatable-striped" [loading]="loading" [globalFilterFields]="['question_bank_id']">
+        <ng-template pTemplate="header">
             <tr>
-                <th></th>
-                <th></th>
-                <th class="text-center"></th>
+                <th>கேள்வி எண்</th>
+                <th>கேள்வி</th>
+                <th class="text-center" width="20%">நடவடிக்கை</th>
             </tr>
-        </thead>
-        <tbody>
+        </ng-template>
+        <ng-template pTemplate="body" let-questions>
+            <tr>
+                <td class="text-center">{{questions.question_bank_id}}</td>
+                <td>{{questions.question_text_tn}}</td>
+                <td><button type="button" pButton class="p-button-outlined p-button-rounded p-button-success m-5" pRipple icon="pi pi-eye" (click)="questionAction(questions, 'view')"></button>
+                    <button type="button" pButton class="p-button-outlined p-button-rounded p-button-warning m-5" pRipple icon="pi pi-pencil" (click)="questionAction(questions, 'edit')"></button>
+                    <button type="button" pButton class="p-button-outlined p-button-rounded p-button-danger m-5" pRipple icon="pi pi-trash" (click)="questionAction(questions, 'delete')"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are {{questions ? questions.length : 0 }} questions.
+            </div>
+        </ng-template>
+    </p-table>
 
-        </tbody>
-    </table>
 </div>

@@ -1,0 +1,7 @@
+span.question-count {
+    float: right;
+    color: #fff;
+    background: #ff8800;
+    padding: 2px 10px;
+    border-radius: 50%;
+}

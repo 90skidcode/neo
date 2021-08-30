@@ -14,12 +14,15 @@ export class ApiService {
   mainURL = 'https://glowmedia.in/neo/api/';
   configURL = this.mainURL + 'database.php';
   
-  getConfig(data: any) {
+  getData(data: any) {
     return this.http.post<any>(this.configURL, data).pipe(
-      retry(0),
+      retry(10),
       catchError(this.handleError)
     );
   }
+
+
+  
 
   // Error handling 
   handleError(error: any) {
