@@ -1,20 +1,14 @@
 <p-toast>
 </p-toast>
+<app-navigation-bar></app-navigation-bar>
 <div class="box">
-    <p-table #dt1 [value]="questions" dataKey="id" responsiveLayout="scroll" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
-        styleClass="p-datatable-sm p-datatable-striped" [loading]="loading" [globalFilterFields]="['question_bank_id','exam_code','question_text_tn']">
+    <p-table [value]="questions" responsiveLayout="scroll" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
+        styleClass="p-datatable-sm p-datatable-striped" [loading]="loading" [globalFilterFields]="['question_bank_id']">
         <ng-template pTemplate="caption">
             <div class="p-d-flex p-ai-center p-jc-between">
                 கேள்வி வங்கி
-                <button pButton class="p-button-outlined p-button-rounded p-button-orange p-button-sm float-right mb-1" icon="pi pi-plus" (click)="questionAction('', 'new')"></button>
+                <button pButton class="p-button-outlined p-button-rounded p-button-orange p-button-sm float-right" icon="pi pi-plus" (click)="questionAction('', 'new')"></button>
                 <div class="clear-fix"></div>
-            </div>
-            <div class="p-d-flex">
-                <button pButton label="Clear" class="p-button-outlined" (click)="clear(dt1)" icon="pi pi-filter-slash"></button>
-                <span class="p-input-icon-left p-ml-auto float-right">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" [(ngModel)]="filterSearchData" (keyup)="filterData(dt1)" placeholder="Search keyword" />
-                </span>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -29,7 +23,7 @@
             <tr>
                 <td class="text-center">{{questions.question_bank_id}}</td>
                 <td>{{questions.question_text_tn}}</td>
-                <td>{{questions.exam_code}}</td>
+                <td>{{questions.exam_no}}</td>
                 <td class="text-center"><button type="button" pButton class="p-button-outlined p-button-rounded p-button-success m-1" pRipple icon="pi pi-eye" (click)="questionAction(questions, 'view')"></button>
                     <button type="button" pButton class="p-button-outlined p-button-rounded p-button-warning m-1" pRipple icon="pi pi-pencil" (click)="questionAction(questions, 'edit')"></button>
                     <button type="button" pButton class="p-button-outlined p-button-rounded p-button-danger m-1" pRipple icon="pi pi-trash" (click)="questionAction(questions, 'delete')"></button>

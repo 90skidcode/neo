@@ -1,35 +1,72 @@
 <app-navigation-bar></app-navigation-bar>
+<p-toast>
+</p-toast>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="small" color="#fff" type="timer" [fullScreen]="true"></ngx-spinner>
 <div class="container-box">
-    <div class="p-card">
-        <h5>Vertical and Grid</h5>
-        <div class="p-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="firstname2">Firstname</label>
-                <input id="firstname2" type="text" pInputText>
+    <p-card header="கேள்வி">
+        <ng-template pTemplate="header">
+            <span class="question-count">{{questionid}}</span>
+        </ng-template>
+
+        <form [formGroup]="question">
+            <div class="p-fluid">
+                <div class="p-field cols-12 pt-0">
+                    <label for="firstname1">கேள்வி English</label>
+                    <textarea [rows]="5" [cols]="30" formControlName="question_text_en" pInputTextarea></textarea>
+                </div>
+                <div class="p-field cols-12">
+                    <label for="firstname1">கேள்வி Tamil</label>
+                    <textarea [rows]="5" [cols]="30" formControlName="question_text_tn" pInputTextarea></textarea>
+                </div>
+                <div class="p-field cols-6">
+                    <label for="firstname1">பதில் English 1</label>
+                    <input type="text" formControlName="option_1_en" pInputText>
+                </div>
+                <div class="p-field cols-6">
+                    <label for="firstname1">பதில் Tamil 1</label>
+                    <input type="text" formControlName="option_1_tn" pInputText>
+                </div>
+                <div class="p-field cols-6">
+                    <label for="firstname1">பதில் English 2</label>
+                    <input type="text" formControlName="option_2_en" pInputText>
+                </div>
+                <div class="p-field cols-6">
+                    <label for="firstname1">பதில் Tamil 2</label>
+                    <input type="text" formControlName="option_2_tn" pInputText>
+                </div>
+                <div class="p-field cols-6 ">
+                    <label for="firstname1">பதில் English 3</label>
+                    <input type="text" formControlName="option_3_en" pInputText>
+                </div>
+                <div class="p-field cols-6 ">
+                    <label for="firstname1">பதில் Tamil 3</label>
+                    <input type="text" formControlName="option_3_tn" pInputText>
+                </div>
+                <div class="p-field cols-6 ">
+                    <label for="firstname1">பதில் English 4</label>
+                    <input type="text" formControlName="option_4_en" pInputText>
+                </div>
+                <div class="p-field cols-6 ">
+                    <label for="firstname1">பதில் Tamil 4</label>
+                    <input type="text" formControlName="option_4_tn" pInputText>
+                </div>
+                <div class="p-field cols-6 ">
+                    <label for="firstname1">சரியான பதில்</label>
+                    <select class="w-100" formControlName="correct_answer">
+                        <option value="">-</option>
+                        <option value="1">பதில் 1</option>
+                        <option value="2">பதில் 2</option>
+                        <option value="3">பதில் 3</option>
+                        <option value="4">பதில் 4</option>
+                    </select>
+                </div>
             </div>
-            <div class="p-field p-col">
-                <label for="lastname2">Lastname</label>
-                <input id="lastname2" type="text" pInputText>
-            </div>
-        </div>
-    </div>
-    <div class="box p-15">
-        <div class="box-header">
-            <h4>Question <span class="question-count">{{questionid}}</span></h4>
+        </form>
+        <div class="clear-fix"></div>
 
-        </div>
-
-        <div class="p-field">
-            <label for="fieldId">Label</label>
-            <input id="fieldId" type="text" pInputText>
-        </div>
-        <div class="p-field p-col-4 p-md-4">
-            <span class="p-float-label">
-                    <input type="text" id="question_id" pInputText readonly> 
-                    <label for="question_id">Question Id</label>
-                </span>
-        </div>
-
-
-    </div>
+        <ng-template pTemplate="footer cols-12 p-5">
+            <button pButton type="button" label="சேமிக்க" [disabled]="!question.valid" icon="pi pi-check" (click)="addQuestion()" class="p-button-sm m-2 p-button-orange float-right"></button>
+            <div class="clear-fix"></div>
+        </ng-template>
+    </p-card>
 </div>

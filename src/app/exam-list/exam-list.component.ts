@@ -1,36 +1,23 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from './../api/api.service';
 import { MessageService } from 'primeng/api';
-import { Table } from 'primeng/table';
-
 
 @Component({
-  selector: 'app-questionbook',
-  templateUrl: './questionbook.component.html',
-  styleUrls: ['./questionbook.component.css'],
-  providers: [MessageService]
+  selector: 'app-exam-list',
+  templateUrl: './exam-list.component.html',
+  styleUrls: ['./exam-list.component.css']
 })
-
-
-export class QuestionbookComponent implements OnInit {
-
+export class ExamListComponent implements OnInit {
   questions: any;
   loading = true;
-  filterSearchData : string = '';
-
-  constructor(private router: Router, private api: ApiService, private messageService: MessageService) {
-
-
-
-  }
+  constructor(private router: Router, private api: ApiService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.tableloadData();
   }
 
-  tableloadData() {
+  tableloadData(){
     let dataParam = {
       'query': 'fetch',
       'key': 'question_bank',
@@ -38,7 +25,7 @@ export class QuestionbookComponent implements OnInit {
         '*': '*'
       },
       'condition': {
-        'status': 1
+        'status' : 1
       }
     };
 
@@ -47,7 +34,7 @@ export class QuestionbookComponent implements OnInit {
       this.loading = false;
     });
   }
-
+  
   questionAction(questions: any, type: string) {
     if (type == 'view')
       this.router.navigate(["/question/" + questions.question_bank_id + "/view"]);
@@ -62,7 +49,7 @@ export class QuestionbookComponent implements OnInit {
           'status': 0
         },
         'condition': {
-          'question_bank_id': questions.question_bank_id
+          'question_bank_id':questions.question_bank_id
         }
       }
 
@@ -70,17 +57,8 @@ export class QuestionbookComponent implements OnInit {
         this.messageService.add({ severity: 'success', summary: 'Question Deleted', detail: 'Question Deleted Succefully' });
         this.tableloadData();
       });
-
-    } else if (type == 'new')
-      this.router.navigate(["/question/0/new"]);
-  }
-
-  clear(table:Table ) {
-    table.clear();
-    this.filterSearchData = "";
-  }
-
-  filterData(dt : Table){
-    dt.filterGlobal(this.filterSearchData, 'contains')
+      
+    }else if(type == 'new')
+    this.router.navigate(["/question/0/new"]);
   }
 }

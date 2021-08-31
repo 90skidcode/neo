@@ -4,4 +4,7 @@ span.question-count {
     background: #ff8800;
     padding: 2px 10px;
     border-radius: 50%;
+    position: relative;
+    top: 25px;
+    right: 25px;
 }

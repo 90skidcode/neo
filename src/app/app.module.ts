@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {InputTextModule} from 'primeng/inputtext';
+import { InputTextModule } from 'primeng/inputtext';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { DataTablesModule } from "angular-datatables";
@@ -16,7 +17,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
+import { CardModule } from 'primeng/card';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { DropdownModule } from 'primeng/dropdown';
 import { QuestionComponent } from './question/question.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { ExamListComponent } from './exam-list/exam-list.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +32,8 @@ import { QuestionComponent } from './question/question.component';
     NavigationBarComponent,
     QuestionbookComponent,
     QuestionpaperComponent,
-    QuestionComponent
+    QuestionComponent,
+    ExamListComponent
   ],
   imports: [
     BrowserModule,
@@ -38,9 +46,14 @@ import { QuestionComponent } from './question/question.component';
     ButtonModule,
     ToastModule,
     BrowserAnimationsModule,
-    InputTextModule
+    InputTextModule,
+    InputTextareaModule,
+    DropdownModule,
+    CardModule,
+    NgxSpinnerModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }
