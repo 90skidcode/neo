@@ -19,6 +19,7 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.api.checkAdmin();
     this.spinner.show();
     this.question = new FormGroup({
       "question_text_en": new FormControl("", Validators.required),

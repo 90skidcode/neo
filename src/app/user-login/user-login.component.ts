@@ -20,7 +20,7 @@ export class UserLoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.api.clearSessionAndLocal();
   }
 
   login() {

@@ -27,7 +27,7 @@
                 <td class="text-center">{{exam.exam_code}}</td>
                 <td class="text-center">{{exam.exam_description}}</td>
                 <td class="text-center">
-                    <button type="button" pButton class="p-button-outlined p-button-rounded p-button-success m-1" pRipple icon="pi pi-user" (click)="examAction(exam, 'view')"></button>
+                    <button type="button" pButton class="p-button-outlined p-button-rounded p-button-success m-1" pRipple icon="pi pi-user" (click)="showDialog(exam.exam_code)"></button>
                     <button type="button" pButton class="p-button-outlined p-button-rounded p-button-success m-1" pRipple icon="pi pi-eye" (click)="examAction(exam, 'view')"></button>
                     <button type="button" pButton class="p-button-outlined p-button-rounded p-button-warning m-1" pRipple icon="pi pi-pencil" (click)="examAction(exam, 'edit')"></button>
                     <button type="button" pButton class="p-button-outlined p-button-rounded p-button-danger m-1" pRipple icon="pi pi-trash" (click)="examAction(exam, 'delete')"></button>
@@ -36,5 +36,39 @@
         </ng-template>
 
     </p-table>
+
+    <p-dialog header=" பயனர் பட்டியல்" [(visible)]="display" [style]="{width: '90vw'}">
+        <p-table #dt1 [value]="examUserLIst" responsiveLayout="scroll" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
+            styleClass="p-datatable-sm p-datatable-striped" [loading]="loading" [globalFilterFields]="['candidate_name','candidate_mobile','candidate_score']">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex">
+                    <button pButton label="Clear" class="p-button-outlined" (click)="clear(dt1)" icon="pi pi-filter-slash"></button>
+                    <span class="p-input-icon-left p-ml-auto float-right">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" [(ngModel)]="filterSearchData" (keyup)="filterData(dt1)" placeholder="Search keyword" />
+                    </span>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr class="text-center">
+                    <th class="text-center">தேர்வு பெயர்</th>
+                    <th class="text-center">பயனர் தொலைபேசி எண் </th>
+                    <th class="text-center">தேர்வு மதிப்பெண்</th>
+                    <th class="text-center">தேர்வு பெயர்</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-examUserLIst>
+                <tr class="text-center">
+                    <td class="text-center">{{examUserLIst.candidate_name | titlecase}}</td>
+                    <td class="text-center">{{examUserLIst.candidate_mobile}}</td>
+                    <td class="text-center">{{examUserLIst.candidate_score}}</td>
+                    <td class="text-center">{{examUserLIst.exam_name | titlecase}}</td>
+
+                </tr>
+            </ng-template>
+
+        </p-table>
+    </p-dialog>
 
 </div>

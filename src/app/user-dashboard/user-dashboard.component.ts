@@ -13,30 +13,31 @@ export class UserDashboardComponent implements OnInit {
   loading: boolean = false;
   constructor(private router: Router, private api: ApiService, private messageService: MessageService,private spinner: NgxSpinnerService) { }
   ngOnInit(): void {
+    this.api.checkUser();    
     this.spinner.show();
     let dataParam = {
-      'query': 'fetch',
-      'key': 'exam_master',
-      'column': {
-        'exam_name': 'exam_name',
-        'exam_code': 'exam_code',
-        'exam_description': 'exam_description',
-      },
-      'condition': {
-        'status': 1
-      }
+      "list_key":"getUserDashboard",
+      "candidate_master_id":localStorage.getItem('userId')
     };
 
-    this.api.getData(dataParam).subscribe(res => {
-      this.exams = res;
+    this.api.getData(dataParam, 'services.php').subscribe(res => {
+      if(res.status_code == '200'){
+        this.exams = res.result;
+      }else{
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: res.message });
+      }
+      
       this.spinner.hide();
     });
   }
 
-  conditionCheckForExam(examCode: string) {
-    //window.open('https://www.payumoney.com/paybypayumoney/#/D21DB42F4AD06C2C9912A538D1A2A1F9', "_self"); 
-    this.router.navigate(["/user-exam"]);
+  conditionCheckForExam(examCode: string, type: string) {
     localStorage.setItem('examCode', examCode);
+    if(type == 'C'){
+    //window.open('https://www.payumoney.com/paybypayumoney/#/D21DB42F4AD06C2C9912A538D1A2A1F9', "_self"); 
+    }else if(type == 'F'){
+      this.router.navigate(["/user-exam/F"]);
+    }    
   }
 
 }

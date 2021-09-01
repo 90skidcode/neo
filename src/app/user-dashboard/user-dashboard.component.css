@@ -2,7 +2,7 @@ img {
     width: 100%;
 }
 
-.pay-button {
-    position: absolute;
-    bottom: 0px;
+.content {
+    height: 170px;
+    overflow: auto;
 }

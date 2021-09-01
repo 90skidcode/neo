@@ -24,9 +24,39 @@ export class UserExamComponent implements OnInit {
   mintues: number = 3;
   seconds: number = 5;
   end: boolean = false;
+  examButtom : boolean = true;
   stateOfButton: boolean[] = [];
+  score : string = '0';
+  total : string = '0';
   constructor(private router: Router, private route: ActivatedRoute, private api: ApiService, private messageService: MessageService, private spinner: NgxSpinnerService, private confirmationService: ConfirmationService) { }
   ngOnInit(): void {
+    this.spinner.show();
+    this.route.paramMap.subscribe(params => {
+      
+      let checkPaymentData = {
+        "list_key": "PaymentLanding",
+        "candidate_master_id": localStorage.getItem('userId'),
+        "exam_code": localStorage.getItem('examCode'),
+        "exam_amount": (params.get('type') == 'F')? '0': '10',
+        "type": params.get('type')
+      }
+      this.api.getData(checkPaymentData, 'services.php').subscribe(r => {
+        if (r.status_code == '200') {
+          this.getExamRules();
+        }else if(r.status_code == '400'){
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: r.message });
+          this.spinner.hide();
+          this.getExamRules();
+        }else{
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: r.message });
+          this.spinner.hide();
+          this.router.navigate(["/user-dashboard"]);
+        }
+      });
+    });
+  }
+
+  getExamRules(){
     this.spinner.show();
     let dataParam = {
       'query': 'fetch',
@@ -41,12 +71,10 @@ export class UserExamComponent implements OnInit {
         'exam_code': localStorage.getItem('examCode')
       }
     };
-
     this.api.getData(dataParam).subscribe(res => {
       this.exams = res;
       this.spinner.hide();
     });
-
   }
 
   startExam(examCode: string) {
@@ -119,11 +147,21 @@ export class UserExamComponent implements OnInit {
   }
 
   endExam() {
+    this.spinner.show();
     this.process = false;
     this.end = true;
     let submitData = {
-      "list_key": "SubmitExam", "candidate_master_id": "1", "exam_code": "100",
+      "list_key": "SubmitExam", "candidate_master_id": "1", "exam_code": localStorage.getItem('examCode'),
       "values": this.quizForm.value
     }
+    this.api.getData(submitData, 'services.php').subscribe(res => {
+      this.spinner.hide();
+      this.score = res.result.candidate_score;
+      this.total = res.result.Total_questions;
+    });
+  }
+
+  home(){
+    this.router.navigate(["/user-dashboard"]);
   }
 }

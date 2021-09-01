@@ -19,6 +19,7 @@ export class ExamComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.api.checkAdmin();
     this.spinner.show();
     this.exam = new FormGroup({
       "exam_name": new FormControl("", Validators.required),

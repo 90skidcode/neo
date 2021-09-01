@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from './../api/api.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-admin-login',
@@ -15,11 +16,11 @@ export class AdminLoginComponent implements OnInit {
     userPassword: new FormControl('', Validators.required),
   });
 
-  constructor(private router: Router, private api: ApiService,private spinner: NgxSpinnerService) {
+  constructor(private route: ActivatedRoute, private api: ApiService, private messageService: MessageService, private spinner: NgxSpinnerService, private router: Router) {
   }
 
   ngOnInit(): void {
-
+    this.api.clearSessionAndLocal();
   }
 
   login() {
@@ -38,9 +39,13 @@ export class AdminLoginComponent implements OnInit {
 
     this.api.getData(data).subscribe((res) => {
       this.spinner.hide();
-      if (res.length)
+      if (res.length == 1) {
+        localStorage.setItem("adminuserId", res[0].admin_user_id);
+        sessionStorage.setItem("login", res[0].admin_user_id);
         this.router.navigate(['/admin-dashboard']);
-      else { }
+      }else {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please check the user name and password' });
+      }
     });
   }
 

@@ -10,6 +10,7 @@ export class UserNavigationBarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+   
   }
 
 }

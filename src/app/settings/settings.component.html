@@ -1,0 +1,26 @@
+<app-navigation-bar>
+</app-navigation-bar>
+<p-toast>
+</p-toast>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="small" color="#fff" type="timer" [fullScreen]="true"></ngx-spinner>
+<div class="container-box">
+    <p-card header="அமைத்தல்">
+        <form [formGroup]="settings">
+            <div class="p-fluid">
+                <div class="p-field cols-6 pt-0">
+                    <label for="settings">கடவுச்சொல்</label>
+                    <input type="text" formControlName="admin_user_password" pInputText>
+                </div>
+
+            </div>
+        </form>
+        <div class="clear-fix"></div>
+
+        <ng-template pTemplate="footer cols-12 p-5">
+            <button pButton type="button" label="வெளியேறு" icon="pi pi-sign-out" (click)="logout()" class="p-button-sm m-2 p-button-danger float-right"></button>
+            <button pButton type="button" label="சேமிக்க" [disabled]="!settings.valid" icon="pi pi-check" (click)="addsettings()" class="p-button-sm m-2 p-button-orange float-right"></button>
+
+            <div class="clear-fix"></div>
+        </ng-template>
+    </p-card>
+</div>

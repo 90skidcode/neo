@@ -33,6 +33,7 @@
                     </ol>
                     <br>
                     <button pButton label="Start Exam" (click)="startExam(exam.exam_code)" class="pay-button  p-button-rounded p-button-orange p-button-sm float-right"></button>
+
                 </div>
             </div>
             <div class="clear-fix"></div>
@@ -64,19 +65,19 @@
                             <h4 class="mb-1 text-900">{{question.question_text_tn | titlecase}}</h4>
                             <h4 class="mb-1 text-900">{{question.question_text_en | titlecase}}</h4>
                             <div class="cols-6">
-                                <input type="radio" id="{{i+1}}" formControlName="{{i+1}}" name="{{i+1}}" value="{{question.question_bank_id}} - 1">
+                                <input type="radio" id="{{i+1}}" formControlName="{{i+1}}" name="{{i+1}}" value="{{question.question_bank_id}}-1">
                                 <label for="{{i+1}}"> {{question.option_1_tn}} / {{question.option_1_en}}</label>
                             </div>
                             <div class="cols-6">
-                                <input type="radio" id="{{i+1}}" formControlName="{{i+1}}" name="{{i+1}}" value="{{question.question_bank_id}} - 2">
+                                <input type="radio" id="{{i+1}}" formControlName="{{i+1}}" name="{{i+1}}" value="{{question.question_bank_id}}-2">
                                 <label for="{{i+1}}"> {{question.option_2_tn}} / {{question.option_2_en}}</label>
                             </div>
                             <div class="cols-6">
-                                <input type="radio" id="{{i+1}}" formControlName="{{i+1}}" name="{{i+1}}" value="{{question.question_bank_id}} - 3">
+                                <input type="radio" id="{{i+1}}" formControlName="{{i+1}}" name="{{i+1}}" value="{{question.question_bank_id}}-3">
                                 <label for="{{i+1}}"> {{question.option_3_tn}} / {{question.option_3_en}}</label>
                             </div>
                             <div class="cols-6">
-                                <input type="radio" id="{{i+1}}" formControlName="{{i+1}}" name="{{i+1}}" value=" {{question.question_bank_id}} - 4">
+                                <input type="radio" id="{{i+1}}" formControlName="{{i+1}}" name="{{i+1}}" value=" {{question.question_bank_id}}-4">
                                 <label for="{{i+1}}"> {{question.option_4_tn}} / {{question.option_4_en}}</label>
                             </div>
                         </div>
@@ -87,10 +88,23 @@
             <div class="text-center">
                 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" position="bottom" [style]="{width: '75vw'}"></p-confirmDialog>
                 <button pButton label="முடிக்க / Finish" (click)="confirm()" pButton icon="pi pi-check" class="pay-button  p-button-rounded p-button-orange p-button-sm"></button>
+
             </div>
         </form>
     </div>
 </div>
 <div class="container-box" *ngIf="end">
-    <h4>Thank you</h4>
+    <p-card>
+        <ng-template pTemplate="header">
+            <div class="cols-12 text-center">
+                <img alt="Card" src="http://neoeconomistsacademy.in/images/logo.png" style="height:150px; width: 150px;">
+            </div>
+            <h2 class="text-center">You have successfully completed the exam <br> நீங்கள் தேர்வை வெற்றிகரமாக முடித்துவிட்டீர்கள்</h2>
+        </ng-template>
+        <h4 class="text-center"> Your Score is {{score}} / {{total}} </h4>
+        <ng-template pTemplate="footer">
+            <button pButton label="Home" (click)="home()" pButton icon="pi pi-home" class="pay-button  p-button-rounded p-button-orange p-button-sm"></button>
+        </ng-template>
+    </p-card>
+
 </div>

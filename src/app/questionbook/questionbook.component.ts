@@ -26,6 +26,7 @@ export class QuestionbookComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.api.checkAdmin();
     this.tableloadData();
   }
 
