@@ -28,8 +28,8 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { UserExamComponent } from './user-exam/user-exam.component';
-
-
+import { UserNavigationBarComponent } from './user-navigation-bar/user-navigation-bar.component';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +44,8 @@ import { UserExamComponent } from './user-exam/user-exam.component';
     UserLoginComponent,
     UserRegisterComponent,
     UserDashboardComponent,
-    UserExamComponent
+    UserExamComponent,
+    UserNavigationBarComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +62,8 @@ import { UserExamComponent } from './user-exam/user-exam.component';
     InputTextareaModule,
     DropdownModule,
     CardModule,
-    NgxSpinnerModule    
+    NgxSpinnerModule,
+    ConfirmDialogModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],

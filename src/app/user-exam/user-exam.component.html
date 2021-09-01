@@ -1,3 +1,7 @@
+<p-toast>
+</p-toast>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="small" color="#fff" type="timer" [fullScreen]="true"></ngx-spinner>
+
 <div class="container-box" *ngIf="start">
     <div class="cols-12" *ngFor="let exam of exams;">
         <p-card>
@@ -38,30 +42,55 @@
 
 
 <div class="container-box" *ngIf="process">
-    <div class="cols-11">
-        <div class="cols-12" *ngFor="let question of questions; let i = index;">
-            <p-card>
-                <div class="cols-12 p-relative">
-                    <div class="cols-1">
-                        {{i+1}}
-                    </div>
-                    <div class="cols-11">
-                        <h4 class="mb-1 text-900">{{question.question_text_tn | titlecase}}</h4>
-                        <h4 class="mb-1 text-900">{{question.question_text_en | titlecase}}</h4>
-                        <input type="radio" id="Q1" name="Q{{question.question_bank_id}}" value="1">
-                        <label for="Q1">  {{question.option_1_tn}} / {{question.option_1_en}}</label><br>
-                    </div>
-                </div>
-                <div class="clear-fix"></div>
-            </p-card>
-        </div>
+    <div class="cols-1 mt-1">
+        <p-card>
+            <div class="cols-12 text-center">
+                <img alt="Card" src="http://neoeconomistsacademy.in/images/logo.png">
+            </div>
+            <h4 class="text-center font-bold timer">{{mintues}} : {{seconds}}</h4>
+        </p-card>
     </div>
-    <div class="cols-1">
-        <h4>{{mintues}} : {{seconds}}</h4>
+    <div class="cols-11 mobile">
+        <form [formGroup]="quizForm">
+            <div class="cols-12" *ngFor="let question of questions; let i = index;">
+                <p-card>
+                    <div class="cols-12 p-relative">
+                        <div class="cols-1">
+                            <span class="serial-no">{{i+1}}</span><br><br>
+                            <span class="dought" [class.dought-marked]="stateOfButton[i]" (click)="changeState(i,question.question_bank_id )"><i
+                                class="pi pi-exclamation-circle"></i></span>
+                        </div>
+                        <div class="cols-11">
+                            <h4 class="mb-1 text-900">{{question.question_text_tn | titlecase}}</h4>
+                            <h4 class="mb-1 text-900">{{question.question_text_en | titlecase}}</h4>
+                            <div class="cols-6">
+                                <input type="radio" id="{{i+1}}" formControlName="{{i+1}}" name="{{i+1}}" value="{{question.question_bank_id}} - 1">
+                                <label for="{{i+1}}"> {{question.option_1_tn}} / {{question.option_1_en}}</label>
+                            </div>
+                            <div class="cols-6">
+                                <input type="radio" id="{{i+1}}" formControlName="{{i+1}}" name="{{i+1}}" value="{{question.question_bank_id}} - 2">
+                                <label for="{{i+1}}"> {{question.option_2_tn}} / {{question.option_2_en}}</label>
+                            </div>
+                            <div class="cols-6">
+                                <input type="radio" id="{{i+1}}" formControlName="{{i+1}}" name="{{i+1}}" value="{{question.question_bank_id}} - 3">
+                                <label for="{{i+1}}"> {{question.option_3_tn}} / {{question.option_3_en}}</label>
+                            </div>
+                            <div class="cols-6">
+                                <input type="radio" id="{{i+1}}" formControlName="{{i+1}}" name="{{i+1}}" value=" {{question.question_bank_id}} - 4">
+                                <label for="{{i+1}}"> {{question.option_4_tn}} / {{question.option_4_en}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear-fix"></div>
+                </p-card>
+            </div>
+            <div class="text-center">
+                <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" position="bottom" [style]="{width: '75vw'}"></p-confirmDialog>
+                <button pButton label="முடிக்க / Finish" (click)="confirm()" pButton icon="pi pi-check" class="pay-button  p-button-rounded p-button-orange p-button-sm"></button>
+            </div>
+        </form>
     </div>
 </div>
-
-
 <div class="container-box" *ngIf="end">
     <h4>Thank you</h4>
 </div>

@@ -1,12 +1,14 @@
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="small" color="#fff" type="timer" [fullScreen]="true">
-</ngx-spinner>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="small" color="#fff" type="timer" [fullScreen]="true"></ngx-spinner>
+<p-toast>
+</p-toast>
 <div class="login-page">
     <div class="form">
         <img class="img-center" src="http://neoeconomistsacademy.in/images/logo.png">
         <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()">
-            <input type="text" placeholder="பயனர்பெயர்" formControlName="userName" required>
-            <input type="password" placeholder="கடவுச்சொல்" formControlName="userPassword" required/>
-            <button type="submit" [disabled]="!loginForm.valid">உள்நுழைய</button>
+            <input type="text" placeholder="Phone Number / தொலைபேசி எண்" formControlName="userPhone" required>
+            <input type="password" placeholder="Password / கடவுச்சொல்" formControlName="userPassword" required/>
+            <button type="submit" [disabled]="!loginForm.valid">உள்நுழைய / Sign In</button>
+            <a class="login mt-2 m" routerLink="/user-register">  பதிவு / Sign Up</a>
         </form>
     </div>
 </div>

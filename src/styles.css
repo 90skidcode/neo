@@ -355,3 +355,8 @@ select.w-100 {
 .float-right {
     float: right;
 }
+
+.login {
+    color: var(--color-green);
+    font-size: 12px;
+}

@@ -12,12 +12,12 @@ import { MessageService } from 'primeng/api';
 export class UserRegisterComponent implements OnInit {
   userRegisterForm = new FormGroup({
     candidate_name: new FormControl('', Validators.required),
-    candidate_mobile: new FormControl('', Validators.required),
-    candidate_email: new FormControl('', Validators.required),
+    candidate_mobile: new FormControl('', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
+    candidate_email: new FormControl('',[Validators.required, Validators.pattern("^(?![_.-])((?![_.-][_.-])[a-zA-Z\d_.-]){0,63}[a-zA-Z\d]@((?!-)((?!--)[a-zA-Z\d-]){0,63}[a-zA-Z\d]\.){1,2}([a-zA-Z]{2,14}\.)?[a-zA-Z]{2,14}$")]),
     candidate_book_code: new FormControl(''),
     candidate_password: new FormControl('', Validators.required),
   });
-
+  
   constructor(private router: Router, private api: ApiService,private spinner: NgxSpinnerService, private messageService: MessageService) {
   }
 
@@ -36,12 +36,12 @@ export class UserRegisterComponent implements OnInit {
     this.api.getData(data).subscribe((res) => {
       this.spinner.hide();
       if (res.status_code == '200')
-        this.router.navigate(['/user-dashboard']);
+        this.router.navigate(['/user-login']);
       else {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong. Please try Again!!' });
        }
     })
 
   }
-
+  
 }

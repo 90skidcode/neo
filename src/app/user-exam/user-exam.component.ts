@@ -1,47 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './../api/api.service';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from "ngx-spinner";
-
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-user-exam',
   templateUrl: './user-exam.component.html',
   styleUrls: ['./user-exam.component.css']
 })
 export class UserExamComponent implements OnInit {
+  quizForm = new FormGroup({
+    1: new FormControl(''),
+    2: new FormControl(''),
+    3: new FormControl('')
+  });
+
   exams: any;
-  questions : any;
+  questions: any;
   loading: boolean = false;
   start: boolean = true;
   process: boolean = false;
   mintues: number = 3;
   seconds: number = 5;
   end: boolean = false;
-  
-  constructor(private router: Router, private route: ActivatedRoute, private api: ApiService, private messageService: MessageService, private spinner: NgxSpinnerService) { }
+  stateOfButton: boolean[] = [];
+  constructor(private router: Router, private route: ActivatedRoute, private api: ApiService, private messageService: MessageService, private spinner: NgxSpinnerService, private confirmationService: ConfirmationService) { }
   ngOnInit(): void {
     this.spinner.show();
-    this.route.paramMap.subscribe(params => {
-      let dataParam = {
-        'query': 'fetch',
-        'key': 'exam_master',
-        'column': {
-          'exam_name': 'exam_name',
-          'exam_code': 'exam_code',
-          'exam_description': 'exam_description',
-        },
-        'condition': {
-          'status': 1,
-          'exam_code': params.get('examid')
-        }
-      };
+    let dataParam = {
+      'query': 'fetch',
+      'key': 'exam_master',
+      'column': {
+        'exam_name': 'exam_name',
+        'exam_code': 'exam_code',
+        'exam_description': 'exam_description',
+      },
+      'condition': {
+        'status': 1,
+        'exam_code': localStorage.getItem('examCode')
+      }
+    };
 
-      this.api.getData(dataParam).subscribe(res => {
-        this.exams = res;
-        this.spinner.hide();
-      });
-    })
+    this.api.getData(dataParam).subscribe(res => {
+      this.exams = res;
+      this.spinner.hide();
+    });
+
   }
 
   startExam(examCode: string) {
@@ -81,24 +86,44 @@ export class UserExamComponent implements OnInit {
       this.spinner.hide();
       this.startTimer();
     });
-   
+
   }
 
   startTimer() {
     let t = setInterval(() => {
       if (this.mintues == 0 && this.seconds == 0) {
-        console.log("hi");
-        this.process = false;
-        this.end = true;
+        this.endExam();
         clearInterval(t);
       } else {
         if (this.seconds)
           this.seconds--;
         else {
-          this.seconds = 5;
+          this.seconds = 59;
           this.mintues--;
         }
       }
     }, 1000);
+  }
+
+  changeState(index: any, questionId: any) {
+    this.stateOfButton[index] = !this.stateOfButton[index];
+  }
+
+  confirm() {
+    this.confirmationService.confirm({
+      message: 'தயவுசெய்து நீங்கள் பதிலளிக்காத கேள்விகள் மற்றும் மதிப்பிடப்பட்ட கேள்விகளை விட்டுவிட்டீர்களா என்று சரிபார்க்கவும். சமர்ப்பித்தவுடன் அதை மாற்ற முடியாது. <br>Please check if you have left any unanswered questions and dought marked questions. Once it is submitted cant able change it.',
+      accept: () => {
+        this.endExam();
+      }
+    });
+  }
+
+  endExam() {
+    this.process = false;
+    this.end = true;
+    let submitData = {
+      "list_key": "SubmitExam", "candidate_master_id": "1", "exam_code": "100",
+      "values": this.quizForm.value
+    }
   }
 }

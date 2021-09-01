@@ -14,9 +14,7 @@ export class QuestionpaperComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.questionid = params.get('questionid');
-      console.log(this.questionid);
       const type = params.get('type');
-      console.log(type);
     });
   }
 

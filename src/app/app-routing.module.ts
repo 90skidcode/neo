@@ -8,6 +8,7 @@ import { ExamComponent } from './exam/exam.component'
 import { UserRegisterComponent } from "./user-register/user-register.component";
 import { UserDashboardComponent } from "./user-dashboard/user-dashboard.component";
 import { UserExamComponent } from "./user-exam/user-exam.component";
+import { UserLoginComponent } from "./user-login/user-login.component";
 const routes: Routes = [
   { path: '', component: AdminLoginComponent },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
@@ -15,8 +16,9 @@ const routes: Routes = [
   { path: 'exam-dashboard', component: ExamListComponent },
   { path: 'exam/:examid/:type', component: ExamComponent },
   { path: 'user-register', component: UserRegisterComponent },
+  { path: 'user-login', component: UserLoginComponent },
   { path: 'user-dashboard', component: UserDashboardComponent },
-  { path: 'user-exam/:examid', component: UserExamComponent },
+  { path: 'user-exam', component: UserExamComponent },
 ];
 
 

@@ -34,7 +34,9 @@ export class UserDashboardComponent implements OnInit {
   }
 
   conditionCheckForExam(examCode: string) {
-    this.router.navigate(["/user-exam/"+examCode]);
+    //window.open('https://www.payumoney.com/paybypayumoney/#/D21DB42F4AD06C2C9912A538D1A2A1F9', "_self"); 
+    this.router.navigate(["/user-exam"]);
+    localStorage.setItem('examCode', examCode);
   }
 
 }

@@ -1,3 +1,50 @@
 img {
     width: 100%;
 }
+
+.serial-no {
+    background: orange;
+    padding: 5px 10px;
+    width: auto;
+    border-radius: 50%;
+    color: #fff;
+}
+
+span.dought {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.timer {
+    font-size: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+    .cols-1.mt-1 {
+        position: fixed;
+        right: 10px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    img {
+        width: 50px;
+    }
+    .cols-1.mt-1 {
+        position: fixed;
+        top: 10px;
+        width: calc(100vw - 30px) !important;
+        z-index: 9999;
+        background-color: #fff;
+    }
+    .cols-11.mobile {
+        margin-top: 200px;
+    }
+    .cols-1 br {
+        display: none;
+    }
+}
+
+span.dought.dought-marked {
+    color: red;
+}
