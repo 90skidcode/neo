@@ -1,0 +1,20 @@
+<div class="container-box">
+    <div class='pm-button'>
+        <a href='https://www.payumoney.com/paybypayumoney/#/D21DB42F4AD06C2C9912A538D1A2A1F9'>Pay</a>
+    </div>
+    <div class="cols-4" *ngFor="let exam of exams;">
+        <p-card>
+            <div class="cols-12 p-relative">
+                <div class="cols-4">
+                    <img alt="Card" src="http://neoeconomistsacademy.in/images/logo.png">
+                </div>
+                <div class="cols-8">
+                    <h4 class="mb-1 text-900">{{exam.exam_name | titlecase}} ({{exam.exam_code | titlecase}})</h4>
+                    <p class="p-0 mb-5">{{exam.exam_description | titlecase}}</p>
+                    <button pButton label="Pay & Start (Rs.10)" (click)="conditionCheckForExam(exam.exam_code)" class="pay-button p-button-outlined p-button-rounded p-button-orange p-button-sm"></button>
+                </div>
+            </div>
+            <div class="clear-fix"></div>
+        </p-card>
+    </div>
+</div>

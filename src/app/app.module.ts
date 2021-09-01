@@ -23,6 +23,12 @@ import { DropdownModule } from 'primeng/dropdown';
 import { QuestionComponent } from './question/question.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ExamListComponent } from './exam-list/exam-list.component';
+import { ExamComponent } from './exam/exam.component';
+import { UserLoginComponent } from './user-login/user-login.component';
+import { UserRegisterComponent } from './user-register/user-register.component';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { UserExamComponent } from './user-exam/user-exam.component';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +39,12 @@ import { ExamListComponent } from './exam-list/exam-list.component';
     QuestionbookComponent,
     QuestionpaperComponent,
     QuestionComponent,
-    ExamListComponent
+    ExamListComponent,
+    ExamComponent,
+    UserLoginComponent,
+    UserRegisterComponent,
+    UserDashboardComponent,
+    UserExamComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +61,7 @@ import { ExamListComponent } from './exam-list/exam-list.component';
     InputTextareaModule,
     DropdownModule,
     CardModule,
-    NgxSpinnerModule
+    NgxSpinnerModule    
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],

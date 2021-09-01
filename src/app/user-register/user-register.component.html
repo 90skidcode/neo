@@ -1,0 +1,16 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="small" color="#fff" type="timer" [fullScreen]="true"></ngx-spinner>
+<p-toast>
+</p-toast>
+<div class="login-page">
+    <div class="form">
+        <img class="img-center" src="http://neoeconomistsacademy.in/images/logo.png">
+        <form class="login-form" [formGroup]="userRegisterForm" (ngSubmit)="userRegister()">
+            <input type="text" placeholder="Name / பெயர்" formControlName="candidate_name">
+            <input type="number" placeholder="Phone Number / தொலைபேசி எண்" formControlName="candidate_mobile">
+            <input type="text" placeholder="Email / மின்னஞ்சல்" formControlName="candidate_email">
+            <input type="text" placeholder="Book Code / புத்தகக் குறியீடு" formControlName="candidate_book_code">
+            <input type="password" placeholder="Password / கடவுச்சொல்" formControlName="candidate_password" />
+            <button type="submit" [disabled]="!userRegisterForm.valid">உள்நுழைய</button>
+        </form>
+    </div>
+</div>

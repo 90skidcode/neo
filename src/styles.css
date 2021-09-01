@@ -85,7 +85,7 @@ body {
     width: 58.33%;
 }
 
-.col-8 {
+.cols-8 {
     width: 66.66%;
 }
 
@@ -114,6 +114,10 @@ body {
     content: "";
     clear: both;
     display: table;
+}
+
+.p-relative {
+    position: relative;
 }
 
 @media only screen and (max-width: 768px) {
@@ -180,6 +184,10 @@ body {
 
 .text-center {
     text-align: center;
+}
+
+button[disabled] {
+    opacity: .5;
 }
 
 

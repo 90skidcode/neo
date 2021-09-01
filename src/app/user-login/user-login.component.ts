@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiService } from './../api/api.service';
+import { ApiService } from '../api/api.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
-  selector: 'app-admin-login',
-  templateUrl: './admin-login.component.html',
-  styleUrls: ['./admin-login.component.css']
+  selector: 'app-user-login',
+  templateUrl: './user-login.component.html',
+  styleUrls: ['./user-login.component.css']
 })
-export class AdminLoginComponent implements OnInit {
+export class UserLoginComponent implements OnInit {
 
   loginForm = new FormGroup({
-    userName: new FormControl('', Validators.required),
-    userPassword: new FormControl('', Validators.required),
+    userName: new FormControl("", Validators.required),
+    userPassword: new FormControl("", Validators.required),
   });
 
-  constructor(private router: Router, private api: ApiService,private spinner: NgxSpinnerService) {
+  constructor(private router: Router, private api: ApiService) {
   }
 
   ngOnInit(): void {
@@ -23,7 +23,6 @@ export class AdminLoginComponent implements OnInit {
   }
 
   login() {
-    this.spinner.show();
     let data = {
       'query': 'fetch',
       'key': 'admin_user',
@@ -37,13 +36,12 @@ export class AdminLoginComponent implements OnInit {
     }
 
     this.api.getData(data).subscribe((res) => {
-      this.spinner.hide();
       if (res.length)
         this.router.navigate(['/admin-dashboard']);
       else { }
-    });
+    })
+
   }
 
+
 }
-
-

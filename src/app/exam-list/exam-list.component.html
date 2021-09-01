@@ -1,32 +1,36 @@
 <p-toast>
 </p-toast>
 <app-navigation-bar></app-navigation-bar>
-<div class="box">
-    <p-table [value]="questions" responsiveLayout="scroll" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
-        styleClass="p-datatable-sm p-datatable-striped" [loading]="loading" [globalFilterFields]="['question_bank_id']">
+<div class="container-box">
+    <p-table [value]="exam" responsiveLayout="scroll" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
+        styleClass="p-datatable-sm p-datatable-striped" [loading]="loading" [globalFilterFields]="['exam_bank_id']">
         <ng-template pTemplate="caption">
             <div class="p-d-flex p-ai-center p-jc-between">
-                கேள்வி வங்கி
-                <button pButton class="p-button-outlined p-button-rounded p-button-orange p-button-sm float-right" icon="pi pi-plus" (click)="questionAction('', 'new')"></button>
+                தேர்வு பட்டியல்
+                <button pButton class="p-button-outlined p-button-rounded p-button-orange p-button-sm float-right" icon="pi pi-plus" (click)="examAction('', 'new')"></button>
                 <div class="clear-fix"></div>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
-            <tr>
-                <th>கேள்வி எண்</th>
-                <th>கேள்வி</th>
-                <th>தேர்வு எண்</th>
+            <tr class="text-center">
+                <th class="text-center">தேர்வு எண்</th>
+                <th class="text-center">தேர்வு பெயர்</th>
+                <th class="text-center">தேர்வு குறியீடு</th>
+                <th class="text-center">தேர்வு விளக்கம்</th>
                 <th class="text-center" width="20%">நடவடிக்கை</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-questions>
-            <tr>
-                <td class="text-center">{{questions.question_bank_id}}</td>
-                <td>{{questions.question_text_tn}}</td>
-                <td>{{questions.exam_no}}</td>
-                <td class="text-center"><button type="button" pButton class="p-button-outlined p-button-rounded p-button-success m-1" pRipple icon="pi pi-eye" (click)="questionAction(questions, 'view')"></button>
-                    <button type="button" pButton class="p-button-outlined p-button-rounded p-button-warning m-1" pRipple icon="pi pi-pencil" (click)="questionAction(questions, 'edit')"></button>
-                    <button type="button" pButton class="p-button-outlined p-button-rounded p-button-danger m-1" pRipple icon="pi pi-trash" (click)="questionAction(questions, 'delete')"></button>
+        <ng-template pTemplate="body" let-exam>
+            <tr class="text-center">
+                <td class="text-center">{{exam.exam_id}}</td>
+                <td class="text-center">{{exam.exam_name}}</td>
+                <td class="text-center">{{exam.exam_code}}</td>
+                <td class="text-center">{{exam.exam_description}}</td>
+                <td class="text-center">
+                    <button type="button" pButton class="p-button-outlined p-button-rounded p-button-success m-1" pRipple icon="pi pi-user" (click)="examAction(exam, 'view')"></button>
+                    <button type="button" pButton class="p-button-outlined p-button-rounded p-button-success m-1" pRipple icon="pi pi-eye" (click)="examAction(exam, 'view')"></button>
+                    <button type="button" pButton class="p-button-outlined p-button-rounded p-button-warning m-1" pRipple icon="pi pi-pencil" (click)="examAction(exam, 'edit')"></button>
+                    <button type="button" pButton class="p-button-outlined p-button-rounded p-button-danger m-1" pRipple icon="pi pi-trash" (click)="examAction(exam, 'delete')"></button>
                 </td>
             </tr>
         </ng-template>

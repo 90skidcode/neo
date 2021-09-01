@@ -1,0 +1,34 @@
+<app-navigation-bar></app-navigation-bar>
+<p-toast>
+</p-toast>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="small" color="#fff" type="timer" [fullScreen]="true"></ngx-spinner>
+<div class="container-box">
+    <p-card header="தேர்வு">
+        <ng-template pTemplate="header">
+            <span class="exam-count">{{examid}}</span>
+        </ng-template>
+
+        <form [formGroup]="exam">
+            <div class="p-fluid">
+                <div class="p-field cols-6 pt-0">
+                    <label for="exam">தேர்வு பெயர்</label>
+                    <input type="text" formControlName="exam_name" pInputText>
+                </div>
+                <div class="p-field cols-6 pt-0">
+                    <label for="exam">தேர்வு குறியீடு</label>
+                    <input type="text" formControlName="exam_code" pInputText>
+                </div>
+                <div class="p-field cols-12">
+                    <label for="exam">தேர்வு விளக்கம்</label>
+                    <textarea [rows]="5" [cols]="30" formControlName="exam_description" pInputTextarea></textarea>
+                </div>
+            </div>
+        </form>
+        <div class="clear-fix"></div>
+
+        <ng-template pTemplate="footer cols-12 p-5">
+            <button pButton type="button" label="சேமிக்க" [disabled]="!exam.valid" icon="pi pi-check" (click)="addexam()" class="p-button-sm m-2 p-button-orange float-right"></button>
+            <div class="clear-fix"></div>
+        </ng-template>
+    </p-card>
+</div>

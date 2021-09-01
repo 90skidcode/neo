@@ -9,8 +9,7 @@ import { Table } from 'primeng/table';
 @Component({
   selector: 'app-questionbook',
   templateUrl: './questionbook.component.html',
-  styleUrls: ['./questionbook.component.css'],
-  providers: [MessageService]
+  styleUrls: ['./questionbook.component.css']
 })
 
 
