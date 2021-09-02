@@ -34,7 +34,7 @@ export class UserDashboardComponent implements OnInit {
   conditionCheckForExam(examCode: string, type: string) {
     localStorage.setItem('examCode', examCode);
     if(type == 'C'){
-    //window.open('https://www.payumoney.com/paybypayumoney/#/D21DB42F4AD06C2C9912A538D1A2A1F9', "_self"); 
+      window.open('https://www.payumoney.com/paybypayumoney/#/D21DB42F4AD06C2C9912A538D1A2A1F9', "_self"); 
     }else if(type == 'F'){
       this.router.navigate(["/user-exam/F"]);
     }    

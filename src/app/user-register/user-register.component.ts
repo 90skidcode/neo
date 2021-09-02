@@ -32,7 +32,7 @@ export class UserRegisterComponent implements OnInit {
       data['list_key'] = "CandidateInsert";      
       this.api.getData(data, 'services.php').subscribe((res) => {
         this.spinner.hide();
-        if (res.status == '200'){
+        if (res.status_code == '200'){
           this.router.navigate(['/user-login']);
           this.messageService.add({ severity: 'success', summary: 'Success', detail: "User resister Successfully !! Please Login!!" });
         }

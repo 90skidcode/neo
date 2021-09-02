@@ -17,15 +17,16 @@
                 <th class="text-center">பயனர் பெயர்</th>
                 <th class="text-center">பயனர் தொலைபேசி எண்</th>
                 <th class="text-center">கட்டணம்</th>
+                <th class="text-center">தேர்வு பெயர்</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-exam>
+        <ng-template pTemplate="body" let-payment>
             <tr class="text-center">
-                <td class="text-center">{{exam.exam_id}}</td>
-                <td class="text-center">{{exam.exam_name}}</td>
-                <td class="text-center">{{exam.exam_code}}</td>
-                <td class="text-center">{{exam.exam_description}}</td>
-
+                <td class="text-center">{{payment.created_at | date}}</td>
+                <td class="text-center">{{payment.candidate_name | titlecase}}</td>
+                <td class="text-center">{{payment.candidate_mobile}}</td>
+                <td class="text-center">{{payment.exam_amount }}</td>
+                <td class="text-center">{{payment.exam_name | titlecase}}</td>
             </tr>
         </ng-template>
 
