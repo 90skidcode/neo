@@ -33,6 +33,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { SettingsComponent } from './settings/settings.component';
 import { PaymentDetailsComponent } from './payment-details/payment-details.component';
 import {DialogModule} from 'primeng/dialog';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { ResultComponent } from './result/result.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +52,8 @@ import {DialogModule} from 'primeng/dialog';
     UserExamComponent,
     UserNavigationBarComponent,
     SettingsComponent,
-    PaymentDetailsComponent
+    PaymentDetailsComponent,
+    ResultComponent
   ],
   imports: [
     BrowserModule,
@@ -69,10 +72,12 @@ import {DialogModule} from 'primeng/dialog';
     CardModule,
     NgxSpinnerModule,
     ConfirmDialogModule,
-    DialogModule
+    DialogModule,
+    AngularEditorModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }
+

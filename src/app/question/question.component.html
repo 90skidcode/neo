@@ -3,20 +3,23 @@
 </p-toast>
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="small" color="#fff" type="timer" [fullScreen]="true"></ngx-spinner>
 <div class="container-box">
-    <p-card header="கேள்வி">
+    <p-card header="வினா">
         <ng-template pTemplate="header">
             <span class="question-count">{{questionid}}</span>
-        </ng-template>
 
+
+        </ng-template>
+        <button pButton type="button" label="சேமிக்க" [disabled]="!question.valid" icon="pi pi-check" (click)="addQuestion()" class="p-button-sm m-2 p-button-orange float-right"></button>
+        <div class="clear-fix"></div>
         <form [formGroup]="question">
             <div class="p-fluid">
                 <div class="p-field cols-12 pt-0">
-                    <label for="firstname1">கேள்வி English</label>
-                    <textarea [rows]="5" [cols]="30" formControlName="question_text_en" pInputTextarea></textarea>
+                    <label for="firstname1">வினா English</label>
+                    <angular-editor id="editor1" formControlName="question_text_en" [config]="config"></angular-editor>
                 </div>
                 <div class="p-field cols-12">
-                    <label for="firstname1">கேள்வி Tamil</label>
-                    <textarea [rows]="5" [cols]="30" formControlName="question_text_tn" pInputTextarea></textarea>
+                    <label for="firstname1">வினா Tamil</label>
+                    <angular-editor id="editor2" formControlName="question_text_tn" [config]="config"></angular-editor>
                 </div>
                 <div class="p-field cols-6">
                     <label for="firstname1">பதில் English 1</label>

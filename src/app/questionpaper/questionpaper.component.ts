@@ -11,12 +11,10 @@ export class QuestionpaperComponent implements OnInit {
     private route: ActivatedRoute,
   ) { }
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void {    
     this.route.paramMap.subscribe(params => {
       this.questionid = params.get('questionid');
       const type = params.get('type');
     });
   }
-
 }

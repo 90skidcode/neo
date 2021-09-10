@@ -10,6 +10,7 @@ import { Table } from 'primeng/table';
   templateUrl: './exam-list.component.html',
   styleUrls: ['./exam-list.component.css']
 })
+
 export class ExamListComponent implements OnInit {
   exam: any;
   examUserLIst: any;
@@ -58,6 +59,7 @@ export class ExamListComponent implements OnInit {
   }
 
   examAction(exams: any, type: string) {
+    this.spinner.show();
     if (type == 'view')
       this.router.navigate(["/exam/" + exams.exam_id + "/view"]);
     else if (type == 'edit')
@@ -76,6 +78,7 @@ export class ExamListComponent implements OnInit {
       }
 
       this.api.getData(deleteData).subscribe(data => {
+        this.spinner.hide();
         this.messageService.add({ severity: 'success', summary: 'Exam Deleted', detail: 'Exam Deleted Succefully' });
         this.tableloadData();
       });

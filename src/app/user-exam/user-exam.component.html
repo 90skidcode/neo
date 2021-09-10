@@ -25,11 +25,11 @@
                     <br>
                     <h4>விதிகள்:</h4>
                     <ol>
-                        <li> 1) தேர்வுக்கான நேரம் 45 நிமிடங்கள் மட்டுமே. </li>
+                        <li> 1) தேர்வுக் குறியீடுகான நேரம் 45 நிமிடங்கள் மட்டுமே. </li>
                         <li> 2) பயனர் ஒரு முறை மட்டுமே தேர்வு எழுத முடியும். </li>
                         <li> 3) நேரம் முடிந்த பிறகு தேர்வு தானாகவே சமர்ப்பிக்கப்படும். </li>
                         <li> 4) மறு தேர்வு இல்லை. </li>
-                        <li> 4) ஒரு தேர்வுக்கான 50 கேள்விகள் மற்றும் கேள்விகள் மற்றும் பதில்கள் தமிழ் மற்றும் ஆங்கிலத்தில் இருக்கும். </li>
+                        <li> 4) ஒரு தேர்வுக் குறியீடுகான 50 வினாகள் மற்றும் வினாகள் மற்றும் பதில்கள் தமிழ் மற்றும் ஆங்கிலத்தில் இருக்கும். </li>
                     </ol>
                     <br>
                     <button pButton label="Start Exam" (click)="startExam(exam.exam_code)" class="pay-button  p-button-rounded p-button-orange p-button-sm float-right"></button>
@@ -61,9 +61,11 @@
                             <span class="dought" [class.dought-marked]="stateOfButton[i]" (click)="changeState(i,question.question_bank_id )"><i
                                 class="pi pi-exclamation-circle"></i></span>
                         </div>
-                        <div class="cols-11">
-                            <h4 class="mb-1 text-900">{{question.question_text_tn | titlecase}}</h4>
-                            <h4 class="mb-1 text-900">{{question.question_text_en | titlecase}}</h4>
+                        <div class="cols-11 p-0">
+                            <p class="mb-1" [innerHTML]="question.question_text_tn"></p>
+                            <br>
+                            <p class="mb-1" [innerHTML]="question.question_text_en"></p>
+                            <br>
                             <div class="cols-6">
                                 <input type="radio" id="{{i+1}}" formControlName="{{i+1}}" name="{{i+1}}" value="{{question.question_bank_id}}-1">
                                 <label for="{{i+1}}"> {{question.option_1_tn}} / {{question.option_1_en}}</label>
@@ -87,7 +89,7 @@
             </div>
             <div class="text-center">
                 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" position="bottom" [style]="{width: '75vw'}"></p-confirmDialog>
-                <button pButton label="முடிக்க / Finish" (click)="confirm()" pButton icon="pi pi-check" class="pay-button  p-button-rounded p-button-orange p-button-sm"></button>
+                <button pButton label="சமர்ப்பிக்கவும் / Submit" (click)="confirm()" pButton icon="pi pi-check" class="pay-button  p-button-rounded p-button-orange p-button-sm"></button>
 
             </div>
         </form>
@@ -101,7 +103,18 @@
             </div>
             <h2 class="text-center">You have successfully completed the exam <br> நீங்கள் தேர்வை வெற்றிகரமாக முடித்துவிட்டீர்கள்</h2>
         </ng-template>
-        <h4 class="text-center"> Your Score is {{score}} / {{total}} </h4>
+        <h2 class="text-center"> Your Score is </h2>
+        <br>
+        <div class="text-center"> Total No of Question : <b>50</b></div>
+        <br>
+        <div class="text-center"> No of Question answered : <b>{{total}}</b></div>
+        <div class="text-center"> Correct answered : <b>{{score}}</b></div>
+        <div class="text-center"> Wrong answered : <b>{{wrong}}</b></div>
+        <br>
+        <h1 class="text-center"> {{score}}</h1>
+        <h4 class="text-center">--------</h4>
+        <h1 class="text-center">{{50}}</h1>
+
         <ng-template pTemplate="footer">
             <button pButton label="Home" (click)="home()" pButton icon="pi pi-home" class="pay-button  p-button-rounded p-button-orange p-button-sm"></button>
         </ng-template>

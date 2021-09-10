@@ -1,6 +1,7 @@
 <p-toast>
 </p-toast>
 <app-navigation-bar></app-navigation-bar>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="small" color="#fff" type="timer" [fullScreen]="true"></ngx-spinner>
 <div class="container-box">
     <p-table [value]="exam" responsiveLayout="scroll" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
         styleClass="p-datatable-sm p-datatable-striped" [loading]="loading" [globalFilterFields]="['exam_bank_id']">
@@ -15,7 +16,7 @@
             <tr class="text-center">
                 <th class="text-center">தேர்வு எண்</th>
                 <th class="text-center">தேர்வு பெயர்</th>
-                <th class="text-center">தேர்வு குறியீடு</th>
+                <th class="text-center">தேர்வுக் குறியீடு</th>
                 <th class="text-center">தேர்வு விளக்கம்</th>
                 <th class="text-center" width="20%">நடவடிக்கை</th>
             </tr>
@@ -34,6 +35,10 @@
                 </td>
             </tr>
         </ng-template>
+        <ng-template pTemplate="summary">
+            <button pButton class="p-button-outlined p-button-rounded p-button-orange p-button-sm float-right mb-1" icon="pi pi-plus" (click)="examAction('', 'new')"></button>
+            <div class="clear-fix"></div>
+        </ng-template>
 
     </p-table>
 
@@ -42,11 +47,12 @@
             styleClass="p-datatable-sm p-datatable-striped" [loading]="loading" [globalFilterFields]="['candidate_name','candidate_mobile','candidate_score']">
             <ng-template pTemplate="caption">
                 <div class="p-d-flex">
-                    <button pButton label="Clear" class="p-button-outlined" (click)="clear(dt1)" icon="pi pi-filter-slash"></button>
+                    <button pButton label="Clear" class="p-button-outlined float-right ml-2" (click)="clear(dt1)" icon="pi pi-filter-slash"></button>
                     <span class="p-input-icon-left p-ml-auto float-right">
                         <i class="pi pi-search"></i>
                         <input pInputText type="text" [(ngModel)]="filterSearchData" (keyup)="filterData(dt1)" placeholder="Search keyword" />
                     </span>
+                    <div class="clear-fix"></div>
                 </div>
             </ng-template>
             <ng-template pTemplate="header">
@@ -67,7 +73,6 @@
 
                 </tr>
             </ng-template>
-
         </p-table>
     </p-dialog>
 

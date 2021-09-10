@@ -40,4 +40,8 @@ export class UserDashboardComponent implements OnInit {
     }    
   }
 
+  viewResult(examCode: string){
+    this.router.navigate(["/result/"+examCode]);
+  }
+
 }

@@ -5,30 +5,31 @@
         styleClass="p-datatable-sm p-datatable-striped" [loading]="loading" [globalFilterFields]="['question_bank_id','exam_code','question_text_tn']">
         <ng-template pTemplate="caption">
             <div class="p-d-flex p-ai-center p-jc-between">
-                கேள்வி வங்கி
+                வினா வங்கி
                 <button pButton class="p-button-outlined p-button-rounded p-button-orange p-button-sm float-right mb-1" icon="pi pi-plus" (click)="questionAction('', 'new')"></button>
                 <div class="clear-fix"></div>
             </div>
             <div class="p-d-flex">
-                <button pButton label="Clear" class="p-button-outlined" (click)="clear(dt1)" icon="pi pi-filter-slash"></button>
+                <button pButton label="Clear" class="p-button-outlined float-right ml-2" (click)="clear(dt1)" icon="pi pi-filter-slash"></button>
                 <span class="p-input-icon-left p-ml-auto float-right">
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" [(ngModel)]="filterSearchData" (keyup)="filterData(dt1)" placeholder="Search keyword" />
                 </span>
+                <div class="clear-fix"></div>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th>கேள்வி எண்</th>
-                <th>கேள்வி</th>
-                <th>தேர்வு குறியீடு</th>
+                <th>வினா எண்</th>
+                <th>வினா</th>
+                <th>தேர்வுக் குறியீடு</th>
                 <th class="text-center" width="20%">நடவடிக்கை</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-questions>
             <tr>
-                <td class="text-center">{{questions.question_bank_id}}</td>
-                <td>{{questions.question_text_tn}}</td>
+                <td class="text-center align-top">{{questions.question_bank_id}}</td>
+                <td [innerHTML]="questions.question_text_tn"></td>
                 <td>{{questions.exam_code}}</td>
                 <td class="text-center">
                     <button type="button" pButton class="p-button-outlined p-button-rounded p-button-success m-1" pRipple icon="pi pi-eye" (click)="questionAction(questions, 'view')"></button>
@@ -37,7 +38,17 @@
                 </td>
             </tr>
         </ng-template>
-
+        <ng-template pTemplate="summary">
+            <button pButton class="p-button-outlined p-button-rounded p-button-orange p-button-sm float-right mb-1" icon="pi pi-plus" (click)="questionAction('', 'new')"></button>
+            <div class="clear-fix"></div>
+            <div class="p-d-flex">
+                <button pButton label="Clear" class="p-button-outlined float-right ml-2" (click)="clear(dt1)" icon="pi pi-filter-slash"></button>
+                <span class="p-input-icon-left p-ml-auto float-right">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" [(ngModel)]="filterSearchData" (keyup)="filterData(dt1)" placeholder="Search keyword" />
+                </span>
+                <div class="clear-fix"></div>
+            </div>
+        </ng-template>
     </p-table>
-
 </div>

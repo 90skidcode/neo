@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from './../api/api.service';
 import { MessageService } from 'primeng/api';
 import { NgxSpinnerService } from "ngx-spinner";
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -14,11 +15,87 @@ export class QuestionComponent implements OnInit {
   questionid: any = '';
   questionType: any = '';
   question!: FormGroup;
-  constructor(private route: ActivatedRoute, private api: ApiService, private messageService: MessageService,private spinner: NgxSpinnerService) {
+  text :string ='';
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: 'auto',
+    minHeight: '0',
+    maxHeight: 'auto',
+    width: 'auto',
+    minWidth: '0',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Enter text here...',
+    defaultParagraphSeparator: '',
+    defaultFontName: '',
+    defaultFontSize: '',
+    fonts: [
+      {class: 'arial', name: 'Arial'},
+      {class: 'times-new-roman', name: 'Times New Roman'},
+      {class: 'calibri', name: 'Calibri'},
+      {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+    ],
+    customClasses: [
+    {
+      name: 'quote',
+      class: 'quote',
+    },
+    {
+      name: 'redText',
+      class: 'redText'
+    },
+    {
+      name: 'titleText',
+      class: 'titleText',
+      tag: 'h1',
+    },
+  ],
+  uploadUrl: 'v1/image',
+  uploadWithCredentials: false,
+  sanitize: true,
+  toolbarPosition: 'top',
+  toolbarHiddenButtons: [
+    [
+      'undo',
+      'redo',
+      'underline',
+      'strikeThrough',
+      'subscript',
+      'superscript',
+      'justifyLeft',
+      'justifyCenter',
+      'justifyRight',
+      'justifyFull',
+      'indent',
+      'outdent',
+      'insertUnorderedList',
+      'insertOrderedList',
+      'heading',
+      'fontName'
+    ],
+    [
+      'fontSize',
+      'textColor',
+      'backgroundColor',
+      'customClasses',
+      'link',
+      'unlink',
+      'insertImage',
+      'insertVideo',
+      'insertHorizontalRule',
+      'removeFormat',
+      'toggleEditorMode'
+    ]
+  ]
+  };
+  constructor(private route: ActivatedRoute,private api: ApiService, private messageService: MessageService,private spinner: NgxSpinnerService) {
 
   }
 
   ngOnInit(): void {
+    this.viewResult();
     this.api.checkAdmin();
     this.spinner.show();
     this.question = new FormGroup({
@@ -84,6 +161,13 @@ export class QuestionComponent implements OnInit {
         });
       }
         
+    });
+  }
+
+  viewResult(){
+    let data = {"list_key":"CandidateExamDetails","candidate_master_id":"1","exam_code":"1"}
+    this.api.getData(data , 'services.php').subscribe(res => { 
+     console.log(data);
     });
   }
 
