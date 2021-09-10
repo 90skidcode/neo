@@ -79,6 +79,7 @@ export class UserExamComponent implements OnInit {
   wrong : string = '0';
   constructor(private router: Router, private route: ActivatedRoute, private api: ApiService, private messageService: MessageService, private spinner: NgxSpinnerService, private confirmationService: ConfirmationService) { }
   ngOnInit(): void {
+    this.api.checkUser(); 
     this.spinner.show();
     this.route.paramMap.subscribe(params => {      
       let checkPaymentData = {
@@ -215,5 +216,9 @@ export class UserExamComponent implements OnInit {
 
   home(){
     this.router.navigate(["/user-dashboard"]);
+  }
+
+  viewResult(){
+    this.router.navigate(["/result/"+localStorage.getItem('examCode')]);
   }
 }

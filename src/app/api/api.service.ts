@@ -23,7 +23,7 @@ export class ApiService {
   }
 
   checkUser() {
-    if (localStorage.getItem('userId') != sessionStorage.getItem('login'))
+    if (!localStorage.getItem('userId'))
       this.router.navigate(["/user-login"]);
   }
 

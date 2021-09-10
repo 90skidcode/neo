@@ -24,9 +24,9 @@
                     <button pButton label="Free Credit & Start (1)" (click)="conditionCheckForExam(exam.exam_code , 'F')" class="pay-button p-button-outlined p-button-rounded p-button-orange p-button-sm m-1"></button>
                 </div>
                 <ng-template #elseBlock>
-                    <!--<button pButton label="View Result - {{exam.candidate_scores}}" (click)="viewResult(exam.exam_code)" class="pay-button p-button-outlined p-button-rounded p-button-orange p-button-sm m-1 float-right"></button>
-                    <div class="clear-fix"></div>-->
-                    <h4 class="text-center">Score - {{exam.candidate_scores}}</h4>
+                    <button pButton label="View Result - {{exam.candidate_scores}}" (click)="viewResult(exam.exam_code)" class="pay-button p-button-outlined p-button-rounded p-button-orange p-button-sm m-1 float-right"></button>
+                    <div class="clear-fix"></div>
+                    <!-- <h4 class="text-center">Score - {{exam.candidate_scores}}</h4>-->
                 </ng-template>
             </ng-template>
         </p-card>

@@ -1,1 +1,44 @@
-<p>result works!</p>
+<p-toast>
+</p-toast>
+<app-user-navigation-bar></app-user-navigation-bar>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="small" color="#fff" type="timer" [fullScreen]="true"></ngx-spinner>
+<div class="container-box">
+    <div class="cols-12 mobile">
+        <form>
+            <div class="cols-12" *ngFor="let question of questions; let i = index;">
+                <p-card>
+                    <div class="cols-12 p-relative">
+                        <div class="cols-1">
+                            <span class="serial-no">{{i+1}}</span><br><br>
+                        </div>
+                        <div class="cols-11 p-0">
+                            <p class="mb-1" [innerHTML]="question.question_text_tn"></p>
+                            <br>
+                            <p class="mb-1" [innerHTML]="question.question_text_en"></p>
+                            <br>
+                            <div class="cols-6">
+                                <label class="{{(question.candidate_answer == '1')? 'candidate_answer' : ''}}  {{(question.correct_answer == '1')? 'correct_answer' : ''}}">A)  {{question.option_1_tn}} / {{question.option_1_en}}</label>
+                            </div>
+                            <div class="cols-6">
+
+                                <label class="{{(question.candidate_answer == '2')? 'candidate_answer' : ''}}  {{(question.correct_answer == '2')? 'correct_answer' : ''}}">B) {{question.option_2_tn}} / {{question.option_2_en}}</label>
+                            </div>
+                            <div class="cols-6">
+
+                                <label class="{{(question.candidate_answer == '3')? 'candidate_answer' : ''}}  {{(question.correct_answer == '3')? 'correct_answer' : ''}}">C) {{question.option_3_tn}} / {{question.option_3_en}}</label>
+                            </div>
+                            <div class="cols-6">
+
+                                <label class="{{(question.candidate_answer == '4')? 'candidate_answer' : ''}}  {{(question.correct_answer == '4')? 'correct_answer' : ''}}">d) {{question.option_4_tn}} / {{question.option_4_en}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear-fix"></div>
+                </p-card>
+
+
+            </div>
+            <button pButton label="Home" (click)="home()" pButton icon="pi pi-home" class="pay-button m-3 float-right  p-button-rounded p-button-orange p-button-sm"></button>
+        </form>
+    </div>
+</div>

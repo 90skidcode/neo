@@ -1,0 +1,20 @@
+label.candidate_answer {
+    color: red;
+}
+
+label.candidate_answer:before {
+    content: "\274C";
+    padding-right: 10px;
+    font-weight: 900;
+}
+
+label.correct_answer {
+    color: green;
+    font-weight: bolder;
+}
+
+label.correct_answer:before {
+    content: "\2713";
+    padding-right: 10px;
+    font-weight: 900;
+}
