@@ -48,3 +48,8 @@ span.dought {
 span.dought.dought-marked {
     color: red;
 }
+
+.text-red-900 {
+    color: red;
+    font-weight: bold;
+}
