@@ -53,3 +53,11 @@ span.dought.dought-marked {
     color: red;
     font-weight: bold;
 }
+
+.text-titleCase {
+    text-transform: capitalize;
+}
+
+.cols-6 label {
+    pointer-events: none;
+}

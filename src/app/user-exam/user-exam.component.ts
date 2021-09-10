@@ -179,7 +179,7 @@ export class UserExamComponent implements OnInit {
           this.mintues--;
         }
       }
-      if (this.mintues == 5) {
+      if (this.mintues == 5 && this.seconds == 1) {
         this.messageService.add({ severity: 'error', summary: 'Alert', detail: 'Only 5 minutes left. Hurry up!!.  இன்னும் 5 நிமிடங்கள் மட்டுமே உள்ளன. சீக்கிரம் !! ' });
       }
     }, 1000);
